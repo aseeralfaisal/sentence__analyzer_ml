@@ -17,21 +17,22 @@ tfidf_transformer = TfidfTransformer()
 X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 clf = MultinomialNB().fit(X_train_tfidf, twenty_train.target)
 
-input_data = ["Refaah is a graphic designer"]
+val = input('Enter a sentence \n')
+input_data = []
+input_data.append(val)
 X_new_counts = countVectorizer.transform(input_data)
 X_new_tfidf = tfidf_transformer.transform(X_new_counts)
 
 predicted = clf.predict(X_new_tfidf)
 
 for doc, category in zip(input_data, predicted):
-    if twenty_train.target_names[category] == "alt.atheism":
+    prediction = twenty_train.target_names[category] 
+    if prediction == "alt.atheism" or prediction == "soc.religion.christian":
         result = "Religion Related"
-    elif twenty_train.target_names[category] == "soc.religion.christian":
-        result = "Religion Related"
-    elif twenty_train.target_names[category] == "sci.med":
+    elif prediction == "sci.med":
         result = "Medical Related"
     else:
         result = "Graphics Related"
-    print(twenty_train.target_names[category])
+    print(prediction)
     print("%r => %s" % (doc, result))
 
