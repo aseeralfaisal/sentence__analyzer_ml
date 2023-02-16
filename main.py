@@ -17,7 +17,7 @@ tfidf_transformer = TfidfTransformer()
 X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
 clf = MultinomialNB().fit(X_train_tfidf, twenty_train.target)
 
-val = input('Enter a sentence \n')
+val = input('Type a sentence \n')
 input_data = []
 input_data.append(val)
 X_new_counts = countVectorizer.transform(input_data)
